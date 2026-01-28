@@ -87,5 +87,10 @@ func (a Adapter) Save(order *domain.Order) error {
 }
 
 
-
-
+func (a Adapter) Update(order *domain.Order) error {
+    // Usamos &Order{} (a struct local do banco) para que o GORM saiba o esquema.
+    // Usamos Where para garantir que estamos atualizando o ID correto.
+    return a.db.Model(&Order{}).
+        Where("id = ?", order.ID).
+        Update("status", order.Status).Error
+}

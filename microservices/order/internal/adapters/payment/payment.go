@@ -33,3 +33,4 @@ func (a *Adapter) Charge(order *domain.Order) error {
 	})
 	return err
 }
+
