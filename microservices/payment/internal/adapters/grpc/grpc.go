@@ -3,6 +3,7 @@ package grpc
 import (
 	"context"
 	"fmt"
+	// "time"
 
 	"github.com/huseyinbabal/microservices/payment/internal/application/core/domain"
 	"github.com/ruandg/microservices-proto/golang/payment"
@@ -13,6 +14,8 @@ import (
 
 func (a Adapter) Create(ctx context.Context, request *payment.CreatePaymentRequest) (*payment.CreatePaymentResponse, error) {
 	log.WithContext(ctx).Info("Creating payment...")
+
+	// time.Sleep(5 * time.Second)   teste de timeout do meu serviço payment chamado pelo order(caso o professor queira testar)!!!!!
 
 	newPayment := domain.NewPayment(request.UserId, request.OrderId, request.TotalPrice)
 	result, err := a.api.Charge(ctx, newPayment)
