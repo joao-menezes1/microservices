@@ -17,6 +17,8 @@ type Order struct {
 	CreatedAt int64 `json:"created_at"`
 }
 
+
+
 func NewOrder(customerId int64, orderItems []OrderItem) Order {
 
 	return Order{

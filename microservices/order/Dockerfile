@@ -6,12 +6,12 @@ WORKDIR /app
 COPY . .
 
 # Entra na pasta do serviço específico para buildar
-WORKDIR /app/microservices/payment
+WORKDIR /app/microservices/order
 RUN go mod download
 RUN go build -o main cmd/main.go
 
 FROM alpine:latest
 WORKDIR /root/
 # Copia o binário gerado
-COPY --from=builder /app/microservices/payment/main .
+COPY --from=builder /app/microservices/order/main .
 CMD ["./main"]

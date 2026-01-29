@@ -1,6 +1,5 @@
 package config
 
-
 import (
 	"log"
 	"os"
@@ -26,11 +25,16 @@ func GetApplicationPort() int {
 
 func getEnvironmentValue(key string) string {
 	if os.Getenv(key) == "" {
-		log.Fatalf("%senvironment variable is missing", key)
+		log.Fatalf("%s environment variable is missing", key)
 	}
 	return os.Getenv(key)
 }
 
 func GetPaymentServiceURL() string {
 	return getEnvironmentValue("PAYMENT_SERVICE_URL")
+}
+
+// Adicione esta função para o novo serviço
+func GetShippingServiceURL() string {
+	return getEnvironmentValue("SHIPPING_SERVICE_URL")
 }

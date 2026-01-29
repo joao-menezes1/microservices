@@ -86,6 +86,20 @@ func (a Adapter) Save(order *domain.Order) error {
 	return res.Error
 }
 
+// GetProduct busca um produto na tabela 'products' pelo código
+func (a Adapter) GetProduct(code string) (domain.Product, error) {
+	var productEntity domain.Product
+	
+	// O GORM vai rodar: SELECT * FROM products WHERE code = 'P1' LIMIT 1;
+	res := a.db.First(&productEntity, "code = ?", code)
+	
+	if res.Error != nil {
+		return domain.Product{}, res.Error
+	}
+	
+	return productEntity, nil
+}
+
 
 func (a Adapter) Update(order *domain.Order) error {
     // Usamos &Order{} (a struct local do banco) para que o GORM saiba o esquema.
